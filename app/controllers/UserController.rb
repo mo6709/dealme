@@ -30,11 +30,23 @@ class UserController < ApplicationController
   	@user = User.find_by(username: params[:username])
   	if @user && @user.authenticate(params[:password])
   		# flash[:message]
+      session[:user_id] = @user.id
   		redirect to '/deals'
   	else
         # flash[:message]
         redirect to '/login'
   	end 
   end
+  
+
+
+  
+
+
+
+
+
+
+
 
 end
