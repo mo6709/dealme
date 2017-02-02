@@ -5,7 +5,6 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-  	
   	@user = User.new(username: params[:username], password: params[:password], email: params[:email])
   	if @user.save 
   		session[:user_id] = @user.id
@@ -16,6 +15,8 @@ class UserController < ApplicationController
   		redirect to '/signup'
   	end
   end
+
+
 
   get '/login' do 	
   	if logged_in?
