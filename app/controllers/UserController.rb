@@ -5,9 +5,11 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-  	@user = User.new(params)
+  	
+  	@user = User.new(username: params[:username], password: params[:password], email: params[:email])
   	if @user.save 
   		session[:user_id] = @user.id
+  		binding.pry
   		redirect to '/deals'
   	else
   		redirect to '/signup'
@@ -19,6 +21,7 @@ class UserController < ApplicationController
   end
 
   post '/login' do
+  	"hello"
   end
 
 end
