@@ -21,6 +21,14 @@ class ApplicationController < Sinatra::Base
     def current_user
      	User.find_by_id(session[:user_id])
     end
+
+    def change_password
+      user = current_user
+      if user && (user.authenticate(params[:previous_password])) && (params[:password] == params[:password1])
+        binding.pry
+        user.password = params[:password]
+      end
+    end  
   end
 
 end

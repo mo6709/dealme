@@ -16,9 +16,8 @@
 <body>
   <div class="wrapper">
       <% if session[:user_id]%>
-         <% user = User.find_by_id(session[:user_id])%>
-         <form method="get" action="/users/<%= user.slug%>/edit"> 
-           <input type="submit" value="Update <%= user.username%>">
+         <form method="get" action="/users/edit"> 
+           <input type="submit" value="Update User Info">
          </form>         
       <% end%><br>
       

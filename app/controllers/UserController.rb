@@ -1,7 +1,12 @@
 class UserController < ApplicationController
 
   get '/signup' do
-     erb :'users/create_user'
+    if logged_in?
+      redirect to '/deals'
+    else
+      erb :'users/create_user'
+    end
+     
   end
 
   post '/signup' do
@@ -18,7 +23,7 @@ class UserController < ApplicationController
 
 
 
-  get '/login' do 	
+  get '/login' do 
   	if logged_in?
       redirect to '/deals'  
   	else
@@ -39,7 +44,33 @@ class UserController < ApplicationController
   end
   
 
+  get '/users/edit' do
+    if logged_in?
+      @user = current_user
+      erb :'users/edit'
+    else
+      redirect to '/login'
+    end
+  end
 
+  post '/users/edit' do
+    if logged_in?
+      user = current_user
+      user.username = params[:username] unless params[:username].empty?
+      user.email = params[:email] unless params[:email].empty?
+      change_password
+      if user.save
+        # flash[:message]
+      else
+        # flash[:message]
+      end
+
+      redirect '/deals'
+    else
+      redirect to '/login'
+    end
+
+  end
   
 
 

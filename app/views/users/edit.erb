@@ -1,1 +1,20 @@
-edit.erb
+<h3><%=@user.username %>, what would you like to change</h3><br>
+
+<form method="post" action="/users/edit">
+    <label>Change username:</label><br>
+	<input type="text" name="username" placeholder="<%= @user.username%>"><br>
+
+	<label>Enter new password:</label><br>
+    <input type="password" name="password"><br>
+    <label>Confirm new password:</label><br>
+    <input type="password" name="password1"><br>
+    <label>Enter previous password</label><br>
+    <input type="password" name="previous_password"><br>
+
+    <label>Change email address:</label><br>
+    <input type="email" name="email" placeholder="<%= @user.email%>"><br>
+
+    
+
+    <input type="submit" value="Update">
+</form>
