@@ -16,7 +16,8 @@ class DealController < ApplicationController
 		end
 	end
 
-	post '/deals' do 		
+	post '/deals' do 
+		
 		@deal = Deal.create(
 			                 importance_rate: params[:deal][:importance_rate],
 		                     title: params[:deal][:title],
@@ -26,6 +27,17 @@ class DealController < ApplicationController
 		                     content: params[:deal][:content],
 		                     category_id: params[:deal][:category_id])
 		@deal.category= Category.create(params[:category]) unless params[:category][:name].empty?
+
+		if @deal.save
+			redirect to "/deals/#{@deal.slug}"
+		else
+			redirect to '/deals/new'
+		end
+	end
+
+	get '/deals/:slug' do
+        deal = Deal.find_by_slug(params[:slug])
+		erb :'deals/show'
 	end
 
 end
