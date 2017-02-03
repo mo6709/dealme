@@ -1,0 +1,29 @@
+<h3>Please edit your deal</h3><br>
+
+<form method="post" action="/deals">
+    <label>Importance rate: </label><br>
+	<input type="range" name="importance_rate">    (choose a number from 1-5)<br>
+
+	<label>Title:</label><br>
+	<input type="text" name="title"><br>
+
+	<label>Starting Date:</label><br>
+	<input type="date" name="starting_date"><br>
+
+	<label>Experation Date:</label><br>
+	<input type="date" name="experation_date"><br>
+
+	<label>Link:</label><br>
+	<input type="text" name="link"><br>
+
+	<label>Content:</label><br>
+	<input type="text" name="content"><br>
+
+	<label>Category:</label><br>
+	<h4>Choose the relevent categorie:s</h4>
+	<% Category.all.each do |category|%>
+	  <input type="checkbox" name="category_ids[]" value="<%= category.id%>"><%= category.name%></input>
+	<% end%><br>
+
+     <input type="submit" name="Create Deal">
+</form>
