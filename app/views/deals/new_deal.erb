@@ -2,28 +2,37 @@
 
 <form method="post" action="/deals">
     <label>Importance rate: </label><br>
-	<input type="range" name="importance_rate">    (choose a number from 1-5)<br>
+	<input type="range" name="deal[importance_rate]"><br>
 
 	<label>Title:</label><br>
-	<input type="text" name="title"><br>
+	<input type="text" name="deal[title]"><br>
 
 	<label>Starting Date:</label><br>
-	<input type="date" name="starting_date"><br>
+	<input type="date" name="deal[starting_date]"><br>
 
 	<label>Experation Date:</label><br>
-	<input type="date" name="experation_date"><br>
+	<input type="date" name="deal[experation_date]"><br>
 
 	<label>Link:</label><br>
-	<input type="text" name="link"><br>
+	<input type="text" name="deal[link]"><br>
 
 	<label>Content:</label><br>
-	<input type="text" name="content"><br>
+	<input type="text" name="deal[content]"><br>
 
 	<label>Category:</label><br>
-	<h4>Choose the relevent categorie:s</h4>
-	<% Category.all.each do |category|%>
-	  <input type="checkbox" name="category_ids[]" value="<%= category.id%>"><%= category.name%></input>
-	<% end%><br>
+	<h4>Choose the relevent category</h4>
+	<ul>
+		<% Category.all.each do |category|%>
+		  <li>
+		    <input type="radio" name="deal[category_id]" value="<%= category.id%>"><%= category.name%></input>
+		  </li>
+		<% end%><br>
+	</ul><br>
 
-     <input type="submit" name="Create Deal">
+	<h4>or, create category</h4><br>
+	<label>Category name:</label><br>
+	<input type="text" name="category[name]"><br>
+
+
+    <input type="submit" name="Create Deal">
 </form>
