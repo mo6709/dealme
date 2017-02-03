@@ -16,8 +16,7 @@ class DealController < ApplicationController
 		end
 	end
 
-	post '/deals' do 
-		binding.pry
+	post '/deals' do 		
 		@deal = Deal.create(
 			                 importance_rate: params[:deal][:importance_rate],
 		                     title: params[:deal][:title],
