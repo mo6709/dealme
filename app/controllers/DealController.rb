@@ -8,5 +8,16 @@ class DealController < ApplicationController
 	    end
 	end
 
+	get '/deals/new' do
+		if logged_in?
+			erb :'deals/new_deal'
+		else
+			redirect to '/login'
+		end
+	end
+
+	post '/deals' do 
+		
+	end
 
 end
