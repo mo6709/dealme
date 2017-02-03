@@ -63,6 +63,7 @@ class UserController < ApplicationController
         # flash[:message]
       else
         # flash[:message]
+        binding.pry
       end
 
       redirect '/deals'

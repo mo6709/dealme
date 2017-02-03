@@ -25,8 +25,7 @@ class ApplicationController < Sinatra::Base
     def change_password
       user = current_user
       if user && (user.authenticate(params[:previous_password])) && (params[:password] == params[:password1])
-        binding.pry
-        user.password = params[:password]
+        user.password = params[:password] unless params[:password].empty?
       end
     end  
   end
