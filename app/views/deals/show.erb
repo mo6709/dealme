@@ -1,6 +1,7 @@
 <h3><%= @deal.title%></h3> 
-<a href="<%= @deal.ling%>">Here is wher you will need to go</a>
-<h4><%= @deal.rating%></h4>
-<h4><%= @deal.%></h4>
-<h4><%= @deal.%></h4>
-<h4><%= @deal.%></h4>
+<h4><%= @deal.rating%> deal</h4>
+
+<a href="<%= @deal.link%>">Here is wher you will need to go</a><br>
+<p><%= @deal.content%></p><br>
+<a href="/categories/<%= @deal.category.slug%>"><%= @deal.category.name%></a>
+<p>the deal end at <%= @deal.experation_date%></p>

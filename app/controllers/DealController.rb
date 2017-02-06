@@ -36,7 +36,7 @@ class DealController < ApplicationController
 	end
 
 	get '/deals/:slug' do
-        deal = Deal.find_by_slug(params[:slug])
+        @deal = Deal.find_by_slug(params[:slug])
 		erb :'deals/show'
 	end
 
