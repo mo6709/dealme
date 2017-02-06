@@ -4,12 +4,21 @@ class Deal < ActiveRecord::Base
 	belongs_to :category
     validates_presence_of :title, :link
     
+    def rating
+    	case self.importance_rate.to_i
+    	when 0..20 then "ok"
+        when 20..40 then "good"
+        when 40..60 then "great"	
+    	when 60..80 then "super great"
+    	when 80..100 then "HOT!"
+    	end
+    end
+
     def slug
-    	title.downcase.gsub(" ", "-")
+    	self.title.downcase.gsub(" ", "-")
     end
 
     def self.find_by_slug(slug)
     	deal = self.all.find{|item| item.slug == slug}
-
     end
 end
