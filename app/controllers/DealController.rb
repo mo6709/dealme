@@ -27,15 +27,15 @@ class DealController < ApplicationController
 		@deal.category = Category.create(params[:category]) unless params[:category][:name].empty?
 
 		if @deal.save
-			redirect to "/deals/#{@deal.slug}"
+			redirect to "/deals/#{@deal.id}"
 		else
 			redirect to '/deals/new'
 		end
 	end
 
-	get '/deals/:slug' do
+	get '/deals/:id' do
 	    if logged_in?        
-		    @deal = Deal.find_by_slug(params[:slug])
+		    @deal = Deal.find_by_id(params[:id])
 			if current_user.deal_ids.include?(@deal.id)
 			  erb :'deals/show'
 			else
@@ -45,5 +45,29 @@ class DealController < ApplicationController
 			redirect to '/login'
 		end	  
 	end
+
+	get '/deals/:id/edit' do
+	  if logged_in?        
+		    @deal = Deal.find_by_id(params[:id])
+			if current_user.deal_ids.include?(@deal.id)
+			  erb :'deals/edit'
+			else
+				redirect to '/deals'
+			end
+		else
+			redirect to '/login'
+		end
+	end
+
+    patch '/deals/:id' do
+    end
+
+
+
+
+
+
+
+
 
 end

@@ -4,4 +4,8 @@
 <a href="<%= @deal.link%>">Here is wher you will need to go</a><br>
 <p><%= @deal.content%></p><br>
 <a href="/categories/<%= @deal.category.slug%>"><%= @deal.category.name%></a>
-<p>the deal end at <%= @deal.experation_date%></p>
+<p>the deal end at <%= @deal.experation_date%></p><br>
+
+<form method="get" action="/deals/<%= @deal.id%>/edit">
+	<input type="submit" value="Update Deal">
+</form>
