@@ -2,7 +2,7 @@ class DealController < ApplicationController
 
 	get '/deals' do
         if logged_in?
-		    erb :'deals/index'
+		    erb :'deals/all_deals'
 	    else
 	    	redirect ot '/login'
 	    end
@@ -39,7 +39,7 @@ class DealController < ApplicationController
 			if current_user.deal_ids.include?(@deal.id)
 			  erb :'deals/show'
 			else
-				redirect to '/login'
+				redirect to '/deals'
 			end
 		else
 			redirect to '/login'
