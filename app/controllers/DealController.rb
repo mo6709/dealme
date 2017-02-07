@@ -16,17 +16,15 @@ class DealController < ApplicationController
 		end
 	end
 
-	post '/deals' do 
-		
-		@deal = Deal.create(
-			                 importance_rate: params[:deal][:importance_rate],
-		                     title: params[:deal][:title],
-		                     starting_date: params[:deal][:starting_date],
-		                     experation_date: params[:deal][:experation_date],
-		                     link: params[:deal][:link],
-		                     content: params[:deal][:content],
-		                     category_id: params[:deal][:category_id])
-		@deal.category= Category.create(params[:category]) unless params[:category][:name].empty?
+	post '/deals' do
+		@deal = current_user.deals.create(
+						                 importance_rate: params[:deal][:importance_rate],
+					                     title: params[:deal][:title],
+					                     starting_date: params[:deal][:starting_date],
+					                     link: params[:deal][:link],
+					                     content: params[:deal][:content],
+					                     category_id: params[:deal][:category_id])
+		@deal.category = Category.create(params[:category]) unless params[:category][:name].empty?
 
 		if @deal.save
 			redirect to "/deals/#{@deal.slug}"
@@ -36,8 +34,16 @@ class DealController < ApplicationController
 	end
 
 	get '/deals/:slug' do
-        @deal = Deal.find_by_slug(params[:slug])
-		erb :'deals/show'
+	    if logged_in?        
+		    @deal = Deal.find_by_slug(params[:slug])
+			if current_user.deal_ids.include?(@deal.id)
+			  erb :'deals/show'
+			else
+				redirect to '/login'
+			end
+		else
+			redirect to '/login'
+		end	  
 	end
 
 end
