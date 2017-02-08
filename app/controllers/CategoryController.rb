@@ -10,7 +10,7 @@ class CategoryController < ApplicationController
 	get '/categories/:slug' do
 		if logged_in?
 			@category = Category.find_by_slug(params[:slug])
-			@user_categories = current_user.deals.collect{ |deal| deal if @category.deals.include?(deal)}
+			@category_deals = current_user.deals.collect{ |deal| deal if @category.deals.include?(deal)}
 		    erb :'categories/show_category'
 		else
 			redirect to '/'
