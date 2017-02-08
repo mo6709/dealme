@@ -1,1 +1,13 @@
-deals-index.erb
+<h3><%= current_user.username%> welcome,</h3>
+<h4>Here is your deals bucket</h4><br>
+
+<ul>
+	<% current_user.deals.each do |deal|%>
+	  <li>
+	      <a href="/deals/<%= deal.id%>"><%= deal.title%></a> 
+          <form method="post" action="/deals/<%= deal.id%>/delete">
+          	<input type="submit" value="Delete">
+          </form><br>
+	  </li>
+	<% end%>
+</ul>
