@@ -1,1 +1,9 @@
-categories-index.erb
+<h3>Categories</h3>
+
+<ul>
+	<% current_user.categories.each do |category| %>
+	  <li>
+	    <a href="/categories/<%= category.slug%>"><%= category.name%></a> 
+	  </li>
+	<% end%>
+</ul>
