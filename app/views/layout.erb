@@ -20,8 +20,13 @@
       <% if session[:user_id]%>
          <form method="get" action="/users/edit"> 
            <input type="submit" value="Update User Info">
-         </form>         
-      <% end%><br>
+         </form> 
+
+         <form method="post" action="/logout">
+            <input type="submit" value="Logout">
+         </form>        
+      <% end%>  
+      
       
       <%= yield %>
 
