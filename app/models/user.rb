@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 	has_many :user_deals
 	has_many :deals, through: :user_deals
+	has_many :categories, through: :deals 
 	validates_presence_of :username, :email
 	validates_presence_of :password, :on => :create
 

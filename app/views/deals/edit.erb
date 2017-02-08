@@ -15,7 +15,7 @@
 	<input type="date" name="deal[starting_date]"><br>
 
 	<label>Edit Experation Date:</label><br>
-	<%= @deal.experation_date%><br>
+	<p>the deal end at <%= @deal.experation_date%></p><br>
 	<input type="date" name="deal[experation_date]"><br>
 
 	<label>Edit Link:</label><br>
@@ -43,5 +43,5 @@
 	<input type="text" name="category[name]"><br>
 
 
-    <input type="submit" name="Update Deal">
+    <input type="submit" value="Update Deal">
 </form>

@@ -29,7 +29,6 @@ class DealController < ApplicationController
 		if @deal.save
 			redirect to "/deals/#{@deal.id}"
 		else
-			binding.pry
 			redirect to '/deals/new'
 		end
 	end
@@ -37,7 +36,7 @@ class DealController < ApplicationController
 	get '/deals/:id' do
 	    if logged_in?        
 		    @deal = Deal.find_by_id(params[:id])
-			if current_user.deal_ids.include?(@deal.id)
+			if @deal && current_user.deal_ids.include?(@deal.id)
 			  erb :'deals/show'
 			else
 				redirect to '/deals'
@@ -72,12 +71,11 @@ class DealController < ApplicationController
     		@deal.category_id = params[:deal][:category_id]
 
 
-    		@deal.category = Category.new(name: params[:category][:name]) 
+    		@deal.category = Category.new(name: params[:category][:name]) unless params[:category][:name].empty?
 
             if @deal.save
               redirect to '/deals'
             else
-            	binding.pry
             	redirect to "/deals/#{@deal.id}"
             end    
     	else

@@ -14,7 +14,9 @@
   <link rel="stylesheet" href="/stylesheets/main.css" />
 </head>
 <body>
+
   <div class="wrapper">
+  <a href="/"> <img src="images/dealme-small.png" class="img-responsive main-image"></a>
       <% if session[:user_id]%>
          <form method="get" action="/users/edit"> 
            <input type="submit" value="Update User Info">
