@@ -4,7 +4,7 @@ class DealController < ApplicationController
         if logged_in?
 		    erb :'deals/all_deals'
 	    else
-	    	redirect ot '/login'
+	    	redirect ot '/'
 	    end
 	end
 
@@ -12,7 +12,7 @@ class DealController < ApplicationController
 		if logged_in?
 			erb :'deals/new_deal'
 		else
-			redirect to '/login'
+			redirect to '/'
 		end
 	end
 
@@ -24,11 +24,12 @@ class DealController < ApplicationController
 					                     link: params[:deal][:link],
 					                     content: params[:deal][:content],
 					                     category_id: params[:deal][:category_id])
-		@deal.category = Category.create(params[:category]) unless params[:category][:name].empty?
+		@deal.category = Category.new(params[:category]) unless params[:category][:name].empty?
 
 		if @deal.save
 			redirect to "/deals/#{@deal.id}"
 		else
+			binding.pry
 			redirect to '/deals/new'
 		end
 	end
@@ -42,7 +43,7 @@ class DealController < ApplicationController
 				redirect to '/deals'
 			end
 		else
-			redirect to '/login'
+			redirect to '/'
 		end	  
 	end
 
@@ -55,19 +56,33 @@ class DealController < ApplicationController
 				redirect to '/deals'
 			end
 		else
-			redirect to '/login'
+			redirect to '/'
 		end
 	end
 
     patch '/deals/:id' do
+    	if logged_in?
+    		@deal = Deal.find_by_id(params[:id])
+    		@deal.title = params[:deal][:title]
+    		@deal.importance_rate = params[:deal][:importance_rate]
+    		@deal.starting_date = params[:deal][:starting_date]
+    		@deal.experation_date = params[:deal][:experation_date]
+    		@deal.link = params[:deal][:link]
+    		@deal.content = params[:deal][:content]
+    		@deal.category_id = params[:deal][:category_id]
+
+
+    		@deal.category = Category.new(name: params[:category][:name]) 
+
+            if @deal.save
+              redirect to '/deals'
+            else
+            	binding.pry
+            	redirect to "/deals/#{@deal.id}"
+            end    
+    	else
+    		redirect to '/'
+    	end
     end
-
-
-
-
-
-
-
-
 
 end
