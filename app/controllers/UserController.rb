@@ -70,7 +70,17 @@ class UserController < ApplicationController
     else
       redirect to '/login'
     end
-
   end
+  
+  get '/logout' do
+    if logged_in?
+        session.clear
+        redirect to '/'
+    else
+        redirect to '/'
+    end
+  end
+
+
   
 end
