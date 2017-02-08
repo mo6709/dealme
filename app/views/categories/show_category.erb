@@ -1,1 +1,9 @@
-show category
+<h3><%= @category.name%></h3>
+
+<ul>
+	<% @category_deals.each do |deal|%>
+	    <li>
+	    	 <a href="/deals/<%= deal.id%>"><%= deal.title%></a> 
+	    </li>
+	<% end%>
+</ul>
