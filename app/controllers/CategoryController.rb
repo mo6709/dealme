@@ -9,6 +9,7 @@ class CategoryController < ApplicationController
 
 	get '/categories/:slug' do
 		if logged_in?
+			@category = Category.find_by_slug(params[:slug])
 		    erb :'categories/show_category'
 		else
 			redirect to '/'
