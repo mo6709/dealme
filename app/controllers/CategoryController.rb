@@ -1,6 +1,6 @@
 class CategoryController < ApplicationController
 	get '/categories' do
-		erb :'categories/index'
+		erb :'categories/all_categories'
 	end 
 
 	get '/categories/:slug' do
