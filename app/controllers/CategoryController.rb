@@ -1,10 +1,18 @@
 class CategoryController < ApplicationController
 	get '/categories' do
-		erb :'categories/all_categories'
+		if logged_in?
+		    erb :'categories/all_categories'
+	    else
+	    	redirect to '/'
+	    end
 	end 
 
 	get '/categories/:slug' do
-		erb :'categories/show_category'
+		if logged_in?
+		    erb :'categories/show_category'
+		else
+			redirect to '/'
+		end
 	end
 
 end
