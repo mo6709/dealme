@@ -1,1 +1,47 @@
-edit-deal.erb
+<h3>Please edit your deal</h3><br>
+
+<form method="post" action="/deals/<%= @deal.id%>">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+
+    <label>Importance rate: </label><br>
+	<input type="range" name="deal[importance_rate]" value="<%= @deal.importance_rate%>"><br>
+
+	<label>Edit Title:</label><br>
+	 <%= @deal.title%> <br>
+	 <input type="text" name="deal[title]" placeholder="title:"> <br>
+
+	<label>Edit Starting Date:</label><br>
+	<%= @deal.starting_date%><br>
+	<input type="date" name="deal[starting_date]"><br>
+
+	<label>Edit Experation Date:</label><br>
+	<%= @deal.experation_date%><br>
+	<input type="date" name="deal[experation_date]"><br>
+
+	<label>Edit Link:</label><br>
+	<%= @deal.link%><br>
+	<input type="text" name="deal[link]" placeholder="link"><br>
+
+	<label>Content:</label><br>
+	<%= @deal.content%><br>
+	<input type="text" name="deal[content]"><br>
+
+	<label>Category:</label><br>
+	<h4>Change to the relevent category</h4>
+	<ul>
+	    <% if @deal.category%>
+			<% Category.all.each do |category|%>
+			  <li>
+			    <input type="radio" name="deal[category_id]" value="<%= category.id%>" <%= 'checked' if @deal.category.id == category.id%>><%= category.name%></input>
+			  </li>
+			<% end%><br>
+        <% end%>
+	</ul><br>
+
+	<h4>or, create new category</h4><br>
+	<label>Category name:</label><br>
+	<input type="text" name="category[name]"><br>
+
+
+    <input type="submit" name="Update Deal">
+</form>
