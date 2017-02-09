@@ -1,13 +1,15 @@
-<h3><%= @deal.title%></h3> 
-<h4><%= @deal.rating%> deal</h4>
-
-<a href="<%= @deal.link%>">Here is wher you will need to go</a><br>
-<p><%= @deal.content%></p><br>
+<ul>
+	<li>1)<%= @deal.title%></li>
+	<li>2)<%= @deal.rating%></li>
+	<li>3)<%= @deal.link%></li>
+	<li>4)<%= @deal.content%></li>
+	<li>5)<%= @deal.experation_date%></li>
+</ul>
 <% if @deal.category %>
   <a href="/categories/<%= @deal.category.slug%>"><%= @deal.category.name%></a>
 <% end%>
-<p>the deal end at <%= @deal.experation_date%></p><br>
 
 <form method="get" action="/deals/<%= @deal.id%>/edit">
 	<input type="submit" value="Update Deal">
 </form> 
+

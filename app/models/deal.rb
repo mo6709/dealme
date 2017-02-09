@@ -2,7 +2,8 @@ class Deal < ActiveRecord::Base
 	has_many :user_deals
 	has_many :users, through: :user_deals
 	belongs_to :category
-    validates_presence_of :title, :link, :on => :create    
+    validates_presence_of :title, :link, :on => :create 
+    validates_presence_of :title, :link, :category  
     def rating
     	case self.importance_rate.to_i
     	when 0..20 then "ok"

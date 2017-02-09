@@ -1,10 +1,10 @@
 class DealController < ApplicationController
 
 	get '/deals' do
-        if logged_in?
+        if logged_in? && !current_user.deals.empty?
 		    erb :'deals/all_deals'
 	    else
-	    	redirect ot '/'
+	    	redirect to '/'
 	    end
 	end
 
@@ -62,7 +62,7 @@ class DealController < ApplicationController
     patch '/deals/:id' do
     	if logged_in?
     		@deal = Deal.find_by_id(params[:id])
-    		@deal.title = params[:deal][:title]
+    		@deal.title = params[:deal][:title] 
     		@deal.importance_rate = params[:deal][:importance_rate]
     		@deal.starting_date = params[:deal][:starting_date]
     		@deal.experation_date = params[:deal][:experation_date]
@@ -80,6 +80,15 @@ class DealController < ApplicationController
             end    
     	else
     		redirect to '/'
+    	end
+    end
+
+    delete '/deals/:id/delete' do 
+    	if @deal = current_user.deals.find_by_id(params[:id])
+             Deal.delete(params[:id])
+             redirect to '/deals'
+    	else
+    		redirect to '/deals'
     	end
     end
 
