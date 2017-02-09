@@ -4,6 +4,7 @@ class DealController < ApplicationController
         if logged_in? && !current_user.deals.empty?
 		    erb :'deals/all_deals'
 	    else
+	    	flash[:message] = "Please login"
 	    	redirect to '/'
 	    end
 	end
@@ -12,6 +13,7 @@ class DealController < ApplicationController
 		if logged_in?
 			erb :'deals/new_deal'
 		else
+			flash[:message] = "Please login"
 			redirect to '/'
 		end
 	end
@@ -43,6 +45,7 @@ class DealController < ApplicationController
 				redirect to '/deals'
 			end
 		else
+			flash[:message] = "Please login"
 			redirect to '/'
 		end	  
 	end
@@ -56,6 +59,7 @@ class DealController < ApplicationController
 				redirect to '/deals'
 			end
 		else
+			flash[:message] = "Please login"
 			redirect to '/'
 		end
 	end
@@ -80,6 +84,7 @@ class DealController < ApplicationController
             	redirect to "/deals/#{@deal.id}"
             end    
     	else
+    		flash[:message] = "Please login"
     		redirect to '/'
     	end
     end
