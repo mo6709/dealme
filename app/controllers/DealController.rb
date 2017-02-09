@@ -30,8 +30,10 @@ class DealController < ApplicationController
 		@deal.category = Category.new(params[:category]) unless params[:category][:name].empty?
 
 		if @deal.save
+			flash[:message] = "The deal was created successfully"
 			redirect to "/deals/#{@deal.id}"
 		else
+			flash[:message] = "The deal was NOT created, try again"
 			redirect to '/deals/new'
 		end
 	end
@@ -42,6 +44,7 @@ class DealController < ApplicationController
 			if @deal && current_user.deal_ids.include?(@deal.id)
 			  erb :'deals/show'
 			else
+				flash[:message] = "Please make sure this deal belongs to you"
 				redirect to '/deals'
 			end
 		else
@@ -56,6 +59,7 @@ class DealController < ApplicationController
 			if current_user.deal_ids.include?(@deal.id)
 			  erb :'deals/edit'
 			else
+				flash[:message] = "Please make sure this deal belongs to you"
 				redirect to '/deals'
 			end
 		else
@@ -79,8 +83,10 @@ class DealController < ApplicationController
     		@deal.category = Category.new(name: params[:category][:name]) unless params[:category][:name].empty?
 
             if @deal.save
+              flash[:message] = "You have successfully updated the deal"
               redirect to '/deals'
             else
+            	flash[:message] = "Changes did NOT applayed, please try again"
             	redirect to "/deals/#{@deal.id}"
             end    
     	else
@@ -91,9 +97,11 @@ class DealController < ApplicationController
 
     delete '/deals/:id/delete' do 
     	if @deal = current_user.deals.find_by_id(params[:id])
+    		 flash[:message] = "The deal was successfully deleted"
              Deal.delete(params[:id])
              redirect to '/deals'
     	else
+    		flash[:message] = "Please make sure this deal belongs to you"
     		redirect to '/deals'
     	end
     end
