@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 	has_many :deals
-
+    validates_presence_of :name
 	def slug
 		self.name.downcase.gsub(" ", "-")
 	end
