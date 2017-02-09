@@ -1,6 +1,9 @@
 <h3><%= current_user.username%> welcome,</h3>
-<a href="/deals/new">Add deal here</a>
-<h4>Here is your deals bucket</h4><br>
+<form method="get" action="/deals/new">
+	<input type="submit" value="Add New Deal">
+</form><br>
+
+<h4>Here is your deals bucket:</h4><br>
 <ul>
 	<% current_user.deals.each do |deal|%>
 	  <li>
