@@ -15,7 +15,14 @@
 <body>
 
   <div class="wrapper">
-  <a href="/"> <img src="images/dealme-small.png" class="img-responsive main-image"></a>
+      <div id="flash_message" style="background-color: gray;">
+        <% if flash.has?(:message)%>
+         <%= flash[:message] %>
+      <% end%>
+      </div><br>
+
+      <a href="/"> <img src="images/dealme-small.png" class="img-responsive main-image"></a>
+
       <% if session[:user_id]%>
          <form method="get" action="/users/edit"> 
            <input type="submit" value="Update User Info">
@@ -25,10 +32,7 @@
             <input type="submit" value="Logout">
          </form>        
       <% end%>
-      <% if flash.has?(:message)%>
-         <%= flash[:message] %>
-      <% end%>  
-      
+        
       
       <%= yield %>
 
