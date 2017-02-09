@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bmabey/database_cleaner.git
-  revision: 05d4d8510bb47616e8f35aec5f743af633758381
+  revision: 98d6a84158cbe8e99a22bda7aee8ed84914a158c
   specs:
     database_cleaner (1.5.3)
 
@@ -53,6 +53,8 @@ GEM
       slop (~> 3.4)
     public_suffix (2.0.5)
     rack (1.6.5)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -117,6 +119,7 @@ DEPENDENCIES
   database_cleaner!
   nokogiri
   pry
+  rack-flash3
   rack-test
   rake
   require_all

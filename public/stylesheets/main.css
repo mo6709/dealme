@@ -81,6 +81,10 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+
+  #flash_message {
+    background-color: gray;
+  }
 }
 
 @media screen and (max-width: 600px) {

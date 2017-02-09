@@ -3,7 +3,8 @@ class Deal < ActiveRecord::Base
 	has_many :users, through: :user_deals
 	belongs_to :category
     validates_presence_of :title, :link
-     validates_presence_of :title, :link, :on => :update   
+    validates_presence_of :title, :link, :on => :update
+       
     def rating
     	case self.importance_rate.to_i
     	when 0..20 then "ok"

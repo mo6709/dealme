@@ -8,6 +8,8 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "dealme_secret"
   end
+  
+  use Rack::Flash 
 
   get "/" do
     erb :welcome
