@@ -10,15 +10,20 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-  	@user = User.new(username: params[:username], password: params[:password], email: params[:email])
-  	if @user.save 
-  		session[:user_id] = @user.id
-  		flash[:message] = "User were created successfully" 
-  		redirect to '/deals'
-  	else
-  		flash[:message] = "User can't be created, please fill up all the fields"
-  		redirect to '/signup'
-  	end
+    if User.available_username_or_email(params)
+    	@user = User.new(username: params[:username], password: params[:password], email: params[:email])
+    	if @user.save 
+    		session[:user_id] = @user.id
+    		flash[:message] = "User were created successfully" 
+    		redirect to '/deals'
+    	else
+    		flash[:message] = "User can't be created, please fill up all the fields"
+    		redirect to '/signup'
+    	end
+    else 
+      flash[:message] = "Email or Username has already been taken"
+      redirect to '/signup'
+    end
   end
 
 
@@ -46,7 +51,6 @@ class UserController < ApplicationController
 
   get '/users/edit' do
     if logged_in?
-      @user = current_user
       erb :'users/edit'
     else
       redirect to '/login'
@@ -55,16 +59,16 @@ class UserController < ApplicationController
 
   post '/users/edit' do
     if logged_in?
-      user = current_user
-      user.username = params[:username] unless params[:username].empty?
-      user.email = params[:email] unless params[:email].empty?
-      change_password
-      if user.save
+      if params[:password] && current_user.change_password(params)
+        current_user.update(username: params[:username], password: params[:password], email: params[:password])
+        flash[:message] = "You have successfully updated your user info and password"
+      elsif if current.username != params[:username] || current_user.email != params[:email]
+        current_user.update(username: params[:username], email: params[:email])
         flash[:message] = "You have successfully updated your info"
       else
         flash[:message] = "Sorry, something went wrong. Please go back to update your info"
+        redirect '/users/edit'
       end
-
       redirect '/deals'
     else
       flash[:message] = "Please login"
