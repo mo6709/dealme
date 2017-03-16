@@ -1,0 +1,23 @@
+<div class="container">
+  <header>
+  </header>
+  <div class="col-md-8 col-md-offset-2">
+    <h2>Daily Deals Organizer</h2>
+    
+    <div class="content">
+     <p>Welcome to dealme</p>
+        <% if logged_in? %>
+            <h2><a href="/deals/new">Add Deal</a></h2>
+        <% end%> 
+        <h2><a href="/categories">Categories</a></h2>
+        <h2><a href="/deals">Deals</a></h2> 
+
+    </div>
+
+    <div class="sidebar">
+      <a href="/signup">Signup here</a><br>
+      <a href="/login">Login</a>
+    </div>
+
+  </div>
+</div>
