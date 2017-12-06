@@ -2,7 +2,7 @@
 
 Welcome to dealme!  
 
-Dealme would be able organize all your deal in one place which let you create the deal and save it under a specific category, you would be able to navigate between your deals and their categories to have better organization for all your deals.  The application is require a signup in order to keep track of all your deals. We are about to extend this application with new feature of recommendations deals that you can grab to your deals bucket. 
+Dealme would be able organize all your deals in one place, you can create the deal and save it under a specific category, you would be able to navigate between your deals and their categories to have better organization for all your deals. The application requires signup in order to keep track all your deals. We are about to extend this application with new feature of recommendations deals that you can grab to your deals bucket. 
 
 
 ## Instructions
